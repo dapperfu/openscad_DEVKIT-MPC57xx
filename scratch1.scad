@@ -1,13 +1,26 @@
-width = 58.3;
-length = 125.4;
+width = 130;
+length = 60;
 height = 3;
 corner_r = 10;
 
+$fn = 360;
+
+devkitHoles = [
+ [12.2185,  5.7465],
+ [93.4465,  6.1045],
+ [ 6.3695, 53.9095],
+ [99.6555, 54.0825],
+];
+
 linear_extrude(height = height, center=false) {
-    difference() {
     square([width, length], center=false);
-    translate([corner_r, corner_r, 0]) {
-    circle(radius=corner_r);
-   }
-   }
 }
+
+
+ for (a = devkitHoles) {
+   translate([a[0], a[1]]) {
+        linear_extrude(height = 2*height, center=false) {
+            circle(r=3, center=true);
+        }
+   }   
+ }
